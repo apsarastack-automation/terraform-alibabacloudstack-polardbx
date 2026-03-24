@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 读写分离配置管理模块",
+    "en-US": "PolarDBX Read/Write Splitting Configuration Management Module"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于在已存在的PolarDB-X实例上启用并配置读写分离功能，支持HTAP集成、延迟感知路由、一致性从库读取等高级特性，不创建新实例，仅管理配置状态。",
+    "en-US": "This Terraform module enables and configures read-write splitting on an existing PolarDB-X instance, supporting advanced features such as HTAP integration, latency-aware routing, and consistent replica reads; it does not create new instances, only manages configuration state."
+  },
+  "description": {
+    "zh-Hans": "该模块封装了阿里云Stack PolarDBX服务的读写分离配置能力，通过条件化资源创建（`count = var.enable_read_write_splitting ? 1 : 0`）实现按需启用或停用。它将用户指定的读写分离策略（包括主库读取权重、HTAP参与节点列表、自动加入HTAP开关、延迟执行策略、一致性从库读取开关、HTAP全局启用开关以及存储延迟阈值）安全地应用到目标PolarDBX实例上。所有参数均通过变量注入，确保配置符合基础设施即代码（IaC）最佳实践，并与现有实例的生命周期解耦——仅负责配置层的编排，不干预底层资源的创建或销毁。适用于需要动态调整分布式数据库流量分发策略、构建高可用且低延迟的分析型+事务型混合负载架构的云原生场景。",
+    "en-US": "This module encapsulates the read-write splitting configuration capabilities of Alibaba Cloud Stack PolarDBX, enabling on-demand activation or deactivation through conditional resource creation (`count = var.enable_read_write_splitting ? 1 : 0`). It securely applies user-specified read-write splitting policies—including primary database read weight, HTAP-enabled node list, automatic HTAP node enrollment toggle, delay-based execution strategy, consistent replica read toggle, global HTAP enablement toggle, and storage replication lag threshold—to the target PolarDBX instance. All parameters are injected via variables, ensuring alignment with Infrastructure-as-Code (IaC) best practices and decoupling from the underlying instance lifecycle—this module handles only configuration orchestration and does not manage底层 resource creation or destruction. It is ideal for cloud-native scenarios requiring dynamic adjustment of distributed database traffic distribution strategies and for building highly available, low-latency hybrid transactional and analytical processing (HTAP) architectures."
+  }
+}

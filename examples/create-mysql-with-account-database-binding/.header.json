@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 实例模块化部署",
+    "en-US": "Modular Deployment of PolarDB-X Instance"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于在阿里云上声明式地创建和配置PolarDB-X（分布式关系型数据库）实例，支持网络、存储、数据库及账号的统一编排。",
+    "en-US": "This Terraform module is used to declaratively create and configure a PolarDB-X (distributed relational database) instance on Alibaba Cloud, integrating unified orchestration of networking, storage, databases, and accounts."
+  },
+  "description": {
+    "zh-Hans": "该脚本通过调用本地 `../../modules/polardbx_instance` 模块，实现 PolarDB-X 实例的标准化部署。它接收外部变量（如实例名称、引擎版本、存储容量、专有网络交换机 ID），并自动启用账号与数据库绑定机制（`use_account_database_binding = true`），确保所定义的 `databases` 和 `accounts` 被正确关联与初始化。整个流程涵盖基础设施即代码（IaC）的核心实践：资源解耦、参数化配置、安全合规的访问控制预置，以及云原生数据库服务的全生命周期管理起点。适用于需要高并发、弹性扩展与分布式事务能力的在线业务系统。",
+    "en-US": "This script standardizes the deployment of a PolarDB-X instance by invoking the local `../../modules/polardbx_instance` module. It accepts external variables—such as instance name, engine version, storage capacity, and VPC vSwitch ID—and automatically enables account-database binding (`use_account_database_binding = true`), ensuring that the defined `databases` and `accounts` are correctly associated and initialized. The entire workflow embodies core Infrastructure-as-Code (IaC) practices: resource decoupling, parameterized configuration, security-compliant access control provisioning, and the foundational step for full lifecycle management of cloud-native database services. It is suitable for online business systems requiring high concurrency, elastic scalability, and distributed transaction capabilities."
+  }
+}

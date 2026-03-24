@@ -1,0 +1,142 @@
+{
+  "name": {
+    "description": "The name of the PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "PolarDBX 实例的名称。",
+      "en-US": "The name of the PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "instance_id": {
+    "description": "The ID of an existing PolarDBX instance. If set, no new instance will be created.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "现有PolarDBX实例的ID。如果设置了该参数，则不会创建新实例。",
+      "en-US": "The ID of an existing PolarDB-X instance. If specified, no new instance will be created."
+    },
+    "default": ""
+  },
+  "engine_version": {
+    "description": "The database engine version. Valid values: 5.7, 8.0.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "数据库引擎版本。取值：5.7、8.0。",
+      "en-US": "The database engine version. Valid values: 5.7, 8.0."
+    },
+    "default": "5.7"
+  },
+  "storage": {
+    "description": "The storage size of the instance in GB.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "实例的存储大小（单位：GB）",
+      "en-US": "The storage size of the instance in GB."
+    },
+    "default": "50"
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch for network configuration.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "用于网络配置的交换机ID。",
+      "en-US": "The ID of the VSwitch used for network configuration."
+    },
+    "default": ""
+  },
+  "cn_node_class": {
+    "description": "The class of computing nodes (CN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）类别",
+      "en-US": "The class of computing nodes (CN)."
+    },
+    "default": ""
+  },
+  "cn_node_count": {
+    "description": "The number of computing nodes (CN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）的数量",
+      "en-US": "The number of computing nodes (CN)."
+    },
+    "default": "2"
+  },
+  "dn_node_class": {
+    "description": "The class of storage nodes (DN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的类别",
+      "en-US": "The class of storage nodes (DN)."
+    },
+    "default": ""
+  },
+  "dn_node_count": {
+    "description": "The number of storage nodes (DN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的数量",
+      "en-US": "The number of storage nodes (DN)."
+    },
+    "default": "2"
+  },
+  "topology_type": {
+    "description": "The topology type. Valid values: 1azone, 3azones.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "拓扑类型。有效值：1azone、3azones。",
+      "en-US": "The topology type. Valid values: 1azone, 3azones."
+    },
+    "default": ""
+  },
+  "description": {
+    "description": "The description of the PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "PolarDB-X 实例的描述。",
+      "en-US": "The description of the PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "databases": {
+    "description": "Map of databases to create. Key is database name, value is database configuration.",
+    "type": "map(object({\n    encode      = optional(string, \"utf8mb4\")\n    mode        = optional(string, \"auto\")\n    description = optional(string, \"\")\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的数据库映射表。键为数据库名称，值为数据库配置。",
+      "en-US": "Map of databases to create. The key is the database name, and the value is the database configuration."
+    },
+    "default": "{}"
+  },
+  "accounts": {
+    "description": "Map of accounts to create. Key is account name, value is account configuration.",
+    "type": "map(object({\n    password           = string\n    description        = optional(string, \"\")\n    account_privileges = optional(map(string), {})\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的账户映射表。键为账户名称，值为账户配置。",
+      "en-US": "Map of accounts to create. Key is account name, value is account configuration."
+    },
+    "default": "{}"
+  },
+  "use_account_database_binding": {
+    "description": "Whether to use alibabacloudstack_polardbx_account_database_binding resource for account privileges.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否使用 alibabacloudstack_polardbx_account_database_binding 资源来管理账号权限。",
+      "en-US": "Whether to use the alibabacloudstack_polardbx_account_database_binding resource for account privileges."
+    },
+    "default": "false"
+  }
+}

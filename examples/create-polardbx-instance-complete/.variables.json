@@ -1,0 +1,80 @@
+{
+  "name": {
+    "description": "The name of the PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "PolarDBX 实例的名称。",
+      "en-US": "The name of the PolarDB-X instance."
+    }
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "交换机（VSwitch）的ID。",
+      "en-US": "The ID of the VSwitch."
+    }
+  },
+  "engine_version": {
+    "description": "The database engine version.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "数据库引擎版本。",
+      "en-US": "The database engine version."
+    },
+    "default": "5.7"
+  },
+  "storage": {
+    "description": "The storage size in GB.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储大小（GB）",
+      "en-US": "The storage size in GB."
+    },
+    "default": "50"
+  },
+  "cn_node_count": {
+    "description": "The number of computing nodes (CN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）的数量",
+      "en-US": "The number of computing nodes (CN)."
+    },
+    "default": "2"
+  },
+  "dn_node_count": {
+    "description": "The number of storage nodes (DN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的数量",
+      "en-US": "The number of storage nodes (DN)."
+    },
+    "default": "2"
+  },
+  "databases": {
+    "description": "Map of databases to create.",
+    "type": "map(object({\n    encode      = optional(string, \"utf8mb4\")\n    mode        = optional(string, \"auto\")\n    description = optional(string, \"\")\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的数据库映射图。",
+      "en-US": "Map of databases to create."
+    },
+    "default": "{}"
+  },
+  "accounts": {
+    "description": "Map of accounts to create.",
+    "type": "map(object({\n    password           = string\n    account_type       = optional(string, \"Normal\")\n    description        = optional(string, \"\")\n    account_privileges = optional(map(string), {})\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的账户映射图。",
+      "en-US": "Map of accounts to create."
+    },
+    "default": "{}"
+  }
+}

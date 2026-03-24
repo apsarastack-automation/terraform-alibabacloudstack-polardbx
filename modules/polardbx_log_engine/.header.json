@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 日志引擎（CDC）配置模块",
+    "en-US": "PolarDB-X Log Engine (CDC) Configuration Module"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于为已存在的阿里云PolarDB-X数据库实例启用并配置日志引擎（即变更数据捕获，CDC），支持单流基础部署与多流（Multi-Stream）高级拓扑，可自动适配可用的CDC节点规格，并通过变量灵活控制启停、节点类型、节点数量及流式分组策略。",
+    "en-US": "This Terraform module enables and configures the log engine (i.e., Change Data Capture, CDC) for an existing Alibaba Cloud PolarDB-X database instance, supporting both basic single-stream deployment and advanced multi-stream topologies. It automatically adapts to available CDC node specifications and provides flexible control—via input variables—over enabling/disabling CDC, node type and count, and streaming group policies."
+  },
+  "description": {
+    "zh-Hans": "该模块专为已存在的PolarDB-X实例提供声明式日志引擎（CDC）生命周期管理，不涉及数据库实例本身的创建或销毁。\n\n核心能力包括：  \n- 自动探测目标实例所支持的CDC节点规格（按CPU数量排序，选取最优规格作为默认值），避免因硬编码导致的兼容性风险；  \n- 支持全局启用或禁用日志引擎（通过 `enable_log_engine` 开关控制资源的创建）；  \n- 允许指定基础CDC节点类型（`cdc_node_class`）和节点数量（`cdc_node_count`）；  \n- 内置动态块（`dynamic \"multi_stream\"`），支持定义多个独立的数据变更流（例如按业务域分组），每条数据流可独立配置组名（`group_name`）、备注说明（`comment`）、哈希分片层级（`hash_level`）、专属节点规格（`node_class`）及节点数量（`node_count`）；  \n- 所有配置均基于变量驱动，满足不同规模、多租户、多场景下的CDC弹性部署需求。",
+    "en-US": "This module provides declarative lifecycle management for the Log Engine (CDC) specifically for existing PolarDB-X instances and does not involve the creation or deletion of database instances themselves.\n\nCore capabilities include:\n- Automatic detection of CDC node specifications supported by the target instance (selecting the optimal default based on CPU count), avoiding compatibility risks caused by hard-coded values;\n- Support for globally enabling or disabling the log engine (controlled via the `enable_log_engine` toggle, which governs resource provisioning);\n- Ability to specify the base CDC node class (`cdc_node_class`) and node count (`cdc_node_count`);\n- Built-in dynamic blocks (`dynamic \"multi_stream\"`) to define multiple independent data change streams (e.g., grouped by business domain), where each stream can be independently configured with a group name (`group_name`), comment (`comment`), hash sharding level (`hash_level`), dedicated node class (`node_class`), and node count (`node_count`);\n- All configurations are driven by variables, enabling elastic CDC deployment across diverse scales, multi-tenant environments, and varied use cases."
+  }
+}

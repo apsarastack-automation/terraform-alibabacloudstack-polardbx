@@ -1,0 +1,51 @@
+{
+  "instance_id": {
+    "description": "The ID of the PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "PolarDBX 实例的 ID",
+      "en-US": "The ID of the PolarDB-X instance."
+    }
+  },
+  "instance_name": {
+    "description": "The name of the PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "PolarDBX 实例的名称。",
+      "en-US": "The name of the PolarDB-X instance."
+    }
+  },
+  "database_names": {
+    "description": "List of created database names.",
+    "i18n": {
+      "zh-Hans": "已创建的数据库名称列表。",
+      "en-US": "List of created database names."
+    }
+  },
+  "account_names": {
+    "description": "List of created account names.",
+    "i18n": {
+      "zh-Hans": "已创建的账户名称列表。",
+      "en-US": "List of created account names."
+    }
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch used by the instance.",
+    "i18n": {
+      "zh-Hans": "实例所使用的虚拟交换机（VSwitch）的ID。",
+      "en-US": "The ID of the VSwitch used by the instance."
+    }
+  },
+  "cn_node_class": {
+    "description": "The class of computing nodes (CN).",
+    "i18n": {
+      "zh-Hans": "计算节点（CN）类别",
+      "en-US": "The class of computing nodes (CN)."
+    }
+  },
+  "dn_node_class": {
+    "description": "The class of storage nodes (DN).",
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的类别",
+      "en-US": "The class of storage nodes (DN)."
+    }
+  }
+}

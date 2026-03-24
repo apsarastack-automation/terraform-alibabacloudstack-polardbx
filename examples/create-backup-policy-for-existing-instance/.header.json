@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 备份策略配置模块",
+    "en-US": "PolarDB-X Backup Policy Configuration Module"
+  },
+  "overview": {
+    "zh-Hans": "该脚本采用 Terraform 模块化方式，为 PolarDB-X 数据库实例统一配置可复用的自动备份与日志保留策略，支持全量备份、增量备份、多周期保留以及空间敏感型清理等企业级数据保护能力。",
+    "en-US": "This script configures a unified, reusable automated backup and log retention policy for PolarDB-X database instances using Terraform’s modular approach, supporting full/incremental backups, multi-cycle retention, and space-aware cleanup—enterprise-grade data protection capabilities."
+  },
+  "description": {
+    "zh-Hans": "该模块用于在阿里云 PolarDB-X（分布式数据库）环境中定义和部署精细化的数据备份与日志管理策略。它支持配置备份执行周期（例如每日或每周）、备份集保留天数、备份计划的起始时间；同时提供灵活的日志管理能力，包括本地日志保留数量、保留时长、基于本地磁盘空间阈值触发的强制清理机制，以及备份方式（如逻辑备份或物理备份）与备份类型（如全量备份或增量备份）的声明式配置。所有参数均通过变量注入，确保环境隔离性与策略一致性，适用于满足等保、GDPR 等合规性要求的生产环境，支撑自动化运维与灾备体系建设。",
+    "en-US": "This module is designed to define and deploy fine-grained data backup and log management policies in Alibaba Cloud PolarDB-X (distributed database) environments. It supports configuring backup execution schedules (e.g., daily or weekly), retention periods for backup sets (in days), and start times for backup plans. It also provides flexible log management capabilities, including the number and duration of local log retention, as well as a forced cleanup mechanism triggered by local disk space thresholds. Additionally, it enables declarative configuration of backup methods (e.g., logical or physical backups) and backup types (e.g., full or incremental). All parameters are injected via variables, ensuring environment isolation and policy consistency—making it suitable for automated operations and disaster recovery infrastructure in production environments subject to compliance requirements such as China’s Multi-Level Protection Scheme (MLPS) and GDPR."
+  }
+}

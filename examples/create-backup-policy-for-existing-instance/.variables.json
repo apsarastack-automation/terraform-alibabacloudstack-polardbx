@@ -1,0 +1,111 @@
+{
+  "db_instance_id": {
+    "description": "The ID of the existing PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "现有PolarDB-X实例的ID。",
+      "en-US": "The ID of the existing PolarDB-X instance."
+    }
+  },
+  "backup_period": {
+    "description": "The backup cycle.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份周期",
+      "en-US": "The backup cycle."
+    },
+    "default": "Monday,Wednesday,Friday"
+  },
+  "backup_set_retention": {
+    "description": "The retention period of the backup set.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份集的保留期限。",
+      "en-US": "The retention period of the backup set."
+    },
+    "default": "7"
+  },
+  "backup_plan_begin": {
+    "description": "The start time of the backup.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份的开始时间。",
+      "en-US": "The start time of the backup."
+    },
+    "default": "03:00Z"
+  },
+  "remove_log_retention": {
+    "description": "The retention period of transaction logs.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "交易日志的保留期限",
+      "en-US": "The retention period of transaction logs."
+    },
+    "default": "7"
+  },
+  "local_log_retention_number": {
+    "description": "The number of transaction logs retained locally.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的事务日志数量。",
+      "en-US": "The number of transaction logs retained locally."
+    },
+    "default": "60"
+  },
+  "force_clean_on_high_space_usage": {
+    "description": "Whether to forcibly delete backups when storage space is high.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "当存储空间较高时是否强制删除备份。",
+      "en-US": "Whether to forcibly delete backups when storage space is low."
+    },
+    "default": "1"
+  },
+  "local_log_retention": {
+    "description": "The retention period of transaction logs retained locally.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的交易日志的保留期限。",
+      "en-US": "The retention period of transaction logs retained locally."
+    },
+    "default": "7"
+  },
+  "log_local_retention_space": {
+    "description": "The maximum space occupied by transaction logs retained locally.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的事务日志所占用的最大空间。",
+      "en-US": "The maximum space occupied by transaction logs retained locally."
+    },
+    "default": "30"
+  },
+  "backup_way": {
+    "description": "Backup method.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份方法。",
+      "en-US": "Backup method."
+    },
+    "default": "P"
+  },
+  "backup_type": {
+    "description": "Backup type.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份类型。",
+      "en-US": "Backup type."
+    },
+    "default": "0"
+  }
+}

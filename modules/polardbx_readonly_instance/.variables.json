@@ -1,0 +1,121 @@
+{
+  "name": {
+    "description": "The name of the read-only PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的名称。",
+      "en-US": "The name of the read-only PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "primary_db_instance_id": {
+    "description": "(Required) The ID of the primary PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "（必填）主PolarDBX实例的ID。",
+      "en-US": "(Required) The ID of the primary PolarDB-X instance."
+    }
+  },
+  "create_readonly_instance": {
+    "description": "Whether to create the read-only instance.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否创建只读实例。",
+      "en-US": "Whether to create the read-only instance."
+    },
+    "default": "true"
+  },
+  "engine_version": {
+    "description": "The database engine version. Valid values: 5.7, 8.0.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "数据库引擎版本。取值：5.7、8.0。",
+      "en-US": "The database engine version. Valid values: 5.7, 8.0."
+    },
+    "default": "5.7"
+  },
+  "storage": {
+    "description": "The storage size of the instance in GB.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "实例的存储大小（单位：GB）",
+      "en-US": "The storage size of the instance in GB."
+    },
+    "default": "50"
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch for network configuration.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "用于网络配置的交换机ID。",
+      "en-US": "The ID of the VSwitch used for network configuration."
+    },
+    "default": ""
+  },
+  "cn_node_class": {
+    "description": "The class of computing nodes (CN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）类别",
+      "en-US": "The class of computing nodes (CN)."
+    },
+    "default": ""
+  },
+  "cn_node_count": {
+    "description": "The number of computing nodes (CN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）的数量",
+      "en-US": "The number of computing nodes (CN)."
+    },
+    "default": "2"
+  },
+  "dn_node_class": {
+    "description": "The class of storage nodes (DN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的类别",
+      "en-US": "The class of storage nodes (DN)."
+    },
+    "default": ""
+  },
+  "dn_node_count": {
+    "description": "The number of storage nodes (DN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的数量",
+      "en-US": "The number of storage nodes (DN)."
+    },
+    "default": "2"
+  },
+  "topology_type": {
+    "description": "The topology type. Valid values: 1azone, 3azones.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "拓扑类型。有效值：1azone、3azones。",
+      "en-US": "The topology type. Valid values: 1azone, 3azones."
+    },
+    "default": ""
+  },
+  "description": {
+    "description": "The description of the read-only PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的描述。",
+      "en-US": "The description of the read-only PolarDB-X instance."
+    },
+    "default": ""
+  }
+}

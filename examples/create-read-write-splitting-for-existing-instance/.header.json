@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 读写分离配置模块",
+    "en-US": "PolarDB-X Read/Write Splitting Configuration Module"
+  },
+  "overview": {
+    "zh-Hans": "该脚本用于在阿里云 PolarDB-X（分布式数据库）实例上启用并配置读写分离功能，支持 HTAP 场景集成、一致性从库读取、延迟执行策略以及主库读取权重等高级路由控制。",
+    "en-US": "This script is used to enable and configure read-write splitting on an Alibaba Cloud PolarDB-X (distributed database) instance, supporting advanced routing controls such as HTAP scenario integration, consistent replica reads, delayed execution policies, and primary database read weights."
+  },
+  "description": {
+    "zh-Hans": "该模块封装了 PolarDB-X 实例的读写分离核心配置能力，旨在提升高并发读场景下的系统吞吐量与可用性。它通过动态路由将写请求定向至主节点，读请求则依据策略分发至主库或只读节点（包括 HTAP 节点），从而实现负载均衡与资源隔离。\n\n- **HTAP 集成支持**：通过 `attend_htap_list` 和 `auto_attend_htap` 参数，可显式或自动纳管 HTAP 节点，使分析型查询能够透明地路由至列存引擎节点；  \n- **一致性读保障**：启用 `enable_consistent_replica_read` 后，结合全局时间戳或事务上下文，确保从库读取结果满足会话级或事务级一致性语义；  \n- **延迟敏感控制**：`delay_execution_strategy` 定义了当从库复制延迟超过 `storage_delay_threshold` 时的行为（例如降级至主库读、拒绝读请求或继续读取），配合 `master_read_weight` 可精细调节主库承担读流量的比例；  \n- **生产就绪特性**：所有参数均支持动态更新（依赖底层 API 支持），变更后无需重启实例，适用于灰度发布、弹性扩缩容及故障自愈等运维场景。",
+    "en-US": "This module encapsulates the core read-write splitting configuration capabilities of PolarDB-X instances, designed to enhance system throughput and availability under high-concurrency read workloads. It dynamically routes write requests to the primary node while distributing read requests—according to configurable policies—to either the primary or read-only nodes (including HTAP nodes), thereby achieving load balancing and resource isolation.\n\n- **HTAP Integration Support**: HTAP nodes can be explicitly or automatically enrolled via `attend_htap_list` and `auto_attend_htap`, enabling analytical queries to be transparently routed to columnar-storage engine nodes.  \n- **Consistent Read Guarantee**: When `enable_consistent_replica_read` is enabled, session-level or transaction-level consistency semantics are enforced for replica reads, leveraging global timestamps or transaction context.  \n- **Replication Delay–Aware Control**: `delay_execution_strategy` defines the behavior when replica replication lag exceeds `storage_delay_threshold`—such as downgrading to primary-node reads, rejecting read requests, or continuing replica reads—and works in conjunction with `master_read_weight` to precisely tune the proportion of read traffic handled by the primary node.  \n- **Production-Ready Features**: All parameters support dynamic updates (subject to underlying API support), requiring no instance restart upon modification—ideal for canary releases, elastic scaling, and self-healing operations."
+  }
+}

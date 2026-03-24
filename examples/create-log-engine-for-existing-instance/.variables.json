@@ -1,0 +1,41 @@
+{
+  "instance_id": {
+    "description": "The ID of the existing PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "现有PolarDB-X实例的ID。",
+      "en-US": "The ID of the existing PolarDB-X instance."
+    }
+  },
+  "cdc_node_class": {
+    "description": "The specification for log engine (CDC) nodes. If not specified, the first available CDC class will be used.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "日志引擎（CDC）节点的规格。如果未指定，则使用第一个可用的CDC类。",
+      "en-US": "The specification for log engine (CDC) nodes. If not specified, the first available CDC class will be used."
+    },
+    "default": ""
+  },
+  "cdc_node_count": {
+    "description": "The number of log engine (CDC) nodes.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "日志引擎（CDC）节点数量。",
+      "en-US": "The number of log engine (CDC) nodes."
+    },
+    "default": "2"
+  },
+  "multi_streams": {
+    "description": "List of multi-stream configurations for CDC log engine.",
+    "type": "list(object({\n    group_name = string\n    comment    = optional(string, \"\")\n    hash_level = string\n    node_class = string\n    node_count = number\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "CDC日志引擎的多流配置列表",
+      "en-US": "List of multi-stream configurations for CDC log engine."
+    },
+    "default": "[]"
+  }
+}

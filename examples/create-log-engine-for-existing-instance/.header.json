@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 日志引擎模块配置",
+    "en-US": "PolarDB-X Log Engine Module Configuration"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于在已存在的PolarDB-X实例上启用并配置日志引擎（Log Engine），支持变更数据捕获（CDC）功能及多流并发处理。",
+    "en-US": "This Terraform module enables and configures the Log Engine on an existing PolarDB-X instance, supporting Change Data Capture (CDC) capabilities and concurrent multi-stream processing."
+  },
+  "description": {
+    "zh-Hans": "该模块封装了PolarDB-X日志引擎的核心部署逻辑，通过关联已有实例ID，自动开通并配置高可用、可扩展的日志服务组件。其核心功能包括：  \n- 启用日志引擎服务（`enable_log_engine = true`）；  \n- 指定CDC计算节点规格（`cdc_node_class`）与节点数量（`cdc_node_count`），以适配不同吞吐量场景；  \n- 支持多流（Multi-Streams）模式，提升并行数据订阅与分发能力，适用于复杂实时数仓、异构同步或多消费者架构；  \n- 与底层PolarDB-X实例深度集成，无需手动创建独立资源，确保权限、网络及生命周期的一致性。  \n该配置是构建实时数据链路（如Flink CDC接入、消息队列同步、湖仓一体ETL）的关键基础设施层。",
+    "en-US": "This module encapsulates the core deployment logic of the PolarDB-X Log Engine, automatically enabling and configuring a highly available, scalable log service component by associating with an existing instance ID. Its key features include:  \n- Enabling the Log Engine service (`enable_log_engine = true`);  \n- Specifying the CDC compute node class (`cdc_node_class`) and node count (`cdc_node_count`) to accommodate varying throughput requirements;  \n- Supporting Multi-Streams mode to enhance parallel data subscription and distribution capabilities—ideal for complex real-time data warehousing, heterogeneous synchronization, and multi-consumer architectures;  \n- Deep integration with the underlying PolarDB-X instance, eliminating the need to manually provision standalone resources and ensuring consistency in permissions, networking, and lifecycle management.  \nThis configuration serves as a critical infrastructure layer for building real-time data pipelines—such as Flink CDC ingestion, message queue synchronization, and lakehouse-integrated ETL."
+  }
+}

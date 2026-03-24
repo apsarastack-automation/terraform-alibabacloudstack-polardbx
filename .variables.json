@@ -1,0 +1,342 @@
+{
+  "name": {
+    "description": "The name of the PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "PolarDBX 实例的名称。",
+      "en-US": "The name of the PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "instance_id": {
+    "description": "The ID of an existing PolarDBX instance. If set, no new instance will be created.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "现有PolarDB-X实例的ID。如果设置该参数，则不会创建新实例。",
+      "en-US": "The ID of an existing PolarDB-X instance. If specified, no new instance will be created."
+    },
+    "default": ""
+  },
+  "engine_version": {
+    "description": "The database engine version. Valid values: 5.7, 8.0.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "数据库引擎版本。有效值：5.7、8.0。",
+      "en-US": "The database engine version. Valid values: 5.7, 8.0."
+    },
+    "default": "5.7"
+  },
+  "storage": {
+    "description": "The storage size of the instance in GB.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "实例的存储大小（单位：GB）",
+      "en-US": "The storage size of the instance in GB."
+    },
+    "default": "50"
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch for network configuration.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "用于网络配置的交换机ID。",
+      "en-US": "The ID of the VSwitch used for network configuration."
+    },
+    "default": ""
+  },
+  "cn_node_class": {
+    "description": "The class of computing nodes (CN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）类",
+      "en-US": "The class of computing nodes (CN)."
+    },
+    "default": ""
+  },
+  "cn_node_count": {
+    "description": "The number of computing nodes (CN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "计算节点（CN）的数量",
+      "en-US": "The number of computing nodes (CN)."
+    },
+    "default": "2"
+  },
+  "dn_node_class": {
+    "description": "The class of storage nodes (DN).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的类别",
+      "en-US": "The class of storage nodes (DN)."
+    },
+    "default": ""
+  },
+  "dn_node_count": {
+    "description": "The number of storage nodes (DN).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的数量",
+      "en-US": "The number of storage nodes (DN)."
+    },
+    "default": "2"
+  },
+  "topology_type": {
+    "description": "The topology type. Valid values: 1azone, 3azones.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "拓扑类型。有效值：1azone、3azones。",
+      "en-US": "The topology type. Valid values: 1azone, 3azones."
+    },
+    "default": ""
+  },
+  "description": {
+    "description": "The description of the PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "PolarDB-X 实例的描述。",
+      "en-US": "The description of the PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "databases": {
+    "description": "Map of databases to create. Key is database name, value is database configuration.",
+    "type": "map(object({\n    encode      = optional(string, \"utf8mb4\")\n    mode        = optional(string, \"auto\")\n    description = optional(string, \"\")\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的数据库映射表。键为数据库名称，值为数据库配置。",
+      "en-US": "Map of databases to create. The key is the database name, and the value is the database configuration."
+    },
+    "default": "{}"
+  },
+  "accounts": {
+    "description": "Map of accounts to create. Key is account name, value is account configuration.",
+    "type": "map(object({\n    password           = string\n    description        = optional(string, \"\")\n    account_privileges = optional(map(string), {})\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要创建的账户映射表。键为账户名称，值为账户配置。",
+      "en-US": "Map of accounts to create. Key is account name, value is account configuration."
+    },
+    "default": "{}"
+  },
+  "use_account_database_binding": {
+    "description": "Whether to use alibabacloudstack_polardbx_account_database_binding resource for account privileges.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否使用 alibabacloudstack_polardbx_account_database_binding 资源来管理账号权限。",
+      "en-US": "Whether to use the alibabacloudstack_polardbx_account_database_binding resource for account privileges."
+    },
+    "default": "false"
+  },
+  "enable_log_engine": {
+    "description": "Whether to enable log engine (CDC) configuration.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用日志引擎（CDC）配置。",
+      "en-US": "Whether to enable the log engine (CDC) configuration."
+    },
+    "default": "false"
+  },
+  "log_engine_cdc_node_class": {
+    "description": "The specification for log engine (CDC) nodes.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "日志引擎（CDC）节点的规范。",
+      "en-US": "The specification for log engine (CDC) nodes."
+    },
+    "default": ""
+  },
+  "log_engine_cdc_node_count": {
+    "description": "The number of log engine (CDC) nodes.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "日志引擎（CDC）节点数量。",
+      "en-US": "The number of log engine (CDC) nodes."
+    },
+    "default": "2"
+  },
+  "log_engine_multi_streams": {
+    "description": "List of multi-stream configurations for CDC.",
+    "type": "list(object({\n    group_name = string\n    comment    = optional(string, \"\")\n    hash_level = string\n    node_class = string\n    node_count = number\n  }))",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "CDC 多流配置列表",
+      "en-US": "List of multi-stream configurations for CDC."
+    },
+    "default": "[]"
+  },
+  "enable_read_write_splitting": {
+    "description": "Whether to enable read-write splitting configuration.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用读写分离配置。",
+      "en-US": "Whether to enable read-write splitting configuration."
+    },
+    "default": "false"
+  },
+  "rw_splitting_attend_htap_list": {
+    "description": "List of HTAP instances to attend.",
+    "type": "list(string)",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要参加的HTAP实例列表",
+      "en-US": "List of HTAP instances to attend."
+    },
+    "default": "[]"
+  },
+  "rw_splitting_auto_attend_htap": {
+    "description": "Whether to automatically attend HTAP instances.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否自动加入HTAP实例。",
+      "en-US": "Whether to automatically attend HTAP instances."
+    },
+    "default": "false"
+  },
+  "rw_splitting_delay_execution_strategy": {
+    "description": "Delay execution strategy. Valid values are 0 and 1.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "延迟执行策略。有效值为 0 和 1。",
+      "en-US": "Delay execution strategy. Valid values are 0 and 1."
+    },
+    "default": "0"
+  },
+  "rw_splitting_enable_consistent_replica_read": {
+    "description": "Whether to enable consistent replica read.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用一致性副本读取。",
+      "en-US": "Whether to enable consistent replica reads."
+    },
+    "default": "false"
+  },
+  "rw_splitting_enable_htap": {
+    "description": "Whether to enable HTAP.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用 HTAP。",
+      "en-US": "Whether to enable HTAP."
+    },
+    "default": "false"
+  },
+  "rw_splitting_master_read_weight": {
+    "description": "The read weight of the master instance. Valid values are 1 to 100.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "主实例的读取权重，取值范围为1到100。",
+      "en-US": "The read weight of the master instance. Valid values are 1 to 100."
+    },
+    "default": "50"
+  },
+  "rw_splitting_storage_delay_threshold": {
+    "description": "The storage delay threshold for read-write splitting.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "读写分离的存储延迟阈值",
+      "en-US": "The storage delay threshold for read-write splitting."
+    },
+    "default": "1000"
+  },
+  "enable_readonly_instance": {
+    "description": "Whether to create a read-only instance for the PolarDBX primary instance.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否为PolarDBX主实例创建只读实例。",
+      "en-US": "Whether to create a read-only instance for the PolarDB-X primary instance."
+    },
+    "default": "false"
+  },
+  "readonly_instance_name": {
+    "description": "The name of the read-only PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的名称。",
+      "en-US": "The name of the read-only PolarDB-X instance."
+    },
+    "default": ""
+  },
+  "readonly_storage": {
+    "description": "The storage size of the read-only instance in GB.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读实例的存储空间大小（单位：GB）",
+      "en-US": "The storage size of the read-only instance, in GB."
+    },
+    "default": "50"
+  },
+  "readonly_cn_node_count": {
+    "description": "The number of computing nodes (CN) for the read-only instance.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读实例的计算节点（CN）数量。",
+      "en-US": "The number of computing nodes (CN) for the read-only instance."
+    },
+    "default": "2"
+  },
+  "readonly_dn_node_count": {
+    "description": "The number of storage nodes (DN) for the read-only instance.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读实例的存储节点（DN）数量。",
+      "en-US": "The number of storage nodes (DN) for the read-only instance."
+    },
+    "default": "2"
+  },
+  "readonly_cn_node_class": {
+    "description": "The class of computing nodes (CN) for the read-only instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读实例的计算节点（CN）类别。",
+      "en-US": "The class of computing nodes (CN) for the read-only instance."
+    },
+    "default": ""
+  },
+  "readonly_dn_node_class": {
+    "description": "The class of storage nodes (DN) for the read-only instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读实例的存储节点（DN）类别。",
+      "en-US": "The class of storage nodes (DN) for the read-only instance."
+    },
+    "default": ""
+  },
+  "readonly_description": {
+    "description": "The description of the read-only PolarDBX instance.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的描述。",
+      "en-US": "The description of the read-only PolarDB-X instance."
+    },
+    "default": ""
+  }
+}

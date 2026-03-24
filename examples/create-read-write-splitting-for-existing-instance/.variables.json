@@ -1,0 +1,81 @@
+{
+  "db_instance_id": {
+    "description": "The ID of the existing PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "现有PolarDB-X实例的ID。",
+      "en-US": "The ID of the existing PolarDB-X instance."
+    }
+  },
+  "attend_htap_list": {
+    "description": "List of HTAP instances to attend.",
+    "type": "list(string)",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "要参加的HTAP实例列表",
+      "en-US": "List of HTAP instances to attend."
+    },
+    "default": "[]"
+  },
+  "auto_attend_htap": {
+    "description": "Whether to automatically attend HTAP instances.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否自动加入HTAP实例。",
+      "en-US": "Whether to automatically attend HTAP instances."
+    },
+    "default": "false"
+  },
+  "delay_execution_strategy": {
+    "description": "Delay execution strategy. Valid values are 0 and 1.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "延迟执行策略。有效值为 0 和 1。",
+      "en-US": "Delay execution strategy. Valid values are 0 and 1."
+    },
+    "default": "0"
+  },
+  "enable_consistent_replica_read": {
+    "description": "Whether to enable consistent replica read.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用一致性副本读取。",
+      "en-US": "Whether to enable consistent replica reads."
+    },
+    "default": "false"
+  },
+  "enable_htap": {
+    "description": "Whether to enable HTAP.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否启用 HTAP。",
+      "en-US": "Whether to enable HTAP."
+    },
+    "default": "false"
+  },
+  "master_read_weight": {
+    "description": "The read weight of the master instance. Valid values are 1 to 100.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "主实例的读取权重，取值范围为1到100。",
+      "en-US": "The read weight of the master instance. Valid values are 1 to 100."
+    },
+    "default": "50"
+  },
+  "storage_delay_threshold": {
+    "description": "The storage delay threshold.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "存储延迟阈值",
+      "en-US": "The storage delay threshold."
+    },
+    "default": "1000"
+  }
+}

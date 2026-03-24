@@ -1,0 +1,30 @@
+{
+  "db_instance_id": {
+    "description": "The ID of the PolarDBX instance for which the backup policy is configured.",
+    "i18n": {
+      "zh-Hans": "已配置备份策略的PolarDB-X实例的ID。",
+      "en-US": "The ID of the PolarDB-X instance for which the backup policy is configured."
+    }
+  },
+  "backup_policy_applied": {
+    "description": "Whether the backup policy was applied.",
+    "i18n": {
+      "zh-Hans": "备份策略是否已应用。",
+      "en-US": "Whether the backup policy was applied."
+    }
+  },
+  "backup_period": {
+    "description": "The configured backup cycle.",
+    "i18n": {
+      "zh-Hans": "已配置的备份周期。",
+      "en-US": "The configured backup cycle."
+    }
+  },
+  "backup_set_retention": {
+    "description": "The configured retention period of the backup set.",
+    "i18n": {
+      "zh-Hans": "已配置的备份集保留期限。",
+      "en-US": "The configured retention period for the backup set."
+    }
+  }
+}

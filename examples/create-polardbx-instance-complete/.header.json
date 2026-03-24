@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 分布式数据库实例部署模块",
+    "en-US": "PolarDB-X Distributed Database Instance Deployment Module"
+  },
+  "overview": {
+    "zh-Hans": "该脚本采用 Terraform 模块化方式，自动化创建和配置阿里云 PolarDB-X（原 DRDS）分布式数据库实例，涵盖计算节点（CN）、数据节点（DN）、网络、存储、数据库及账号等核心资源的声明式编排。",
+    "en-US": "This script automates the creation and configuration of Alibaba Cloud PolarDB-X (formerly DRDS) distributed database instances using Terraform’s modular approach, declaratively orchestrating core resources including compute nodes (CN), data nodes (DN), networking, storage, databases, and accounts."
+  },
+  "description": {
+    "zh-Hans": "该 Terraform 配置调用本地 `polardbx_instance` 模块，用于在阿里云环境中一键部署生产就绪的 PolarDB-X 实例。\n\n- **资源抽象**：以模块为单位封装 PolarDB-X 实例的全生命周期管理逻辑，提升复用性与可维护性；  \n- **弹性配置**：支持动态指定实例名称、引擎版本、存储容量、专有网络交换机（vSwitch）以及 CN/DN 节点数量，满足不同业务规模的需求；  \n- **数据层治理**：内置数据库（`databases`）与账号（`accounts`）初始化能力，实现权限隔离与多租户支持；  \n- **网络集成**：强制绑定指定的 `vswitch_id`，确保实例部署于预定义的 VPC 子网中，符合企业网络合规性与安全策略；  \n- **基础设施即代码（IaC）实践**：所有参数均通过变量（`var.*`）注入，便于与 CI/CD 流水线、环境分级（开发/预发/生产）及配置中心集成。",
+    "en-US": "This Terraform configuration invokes the local `polardbx_instance` module to deploy a production-ready PolarDB-X instance on Alibaba Cloud with a single command.\n\n- **Resource Abstraction**: Encapsulates the full lifecycle management logic of a PolarDB-X instance within a module, enhancing reusability and maintainability.  \n- **Elastic Configuration**: Supports dynamic specification of instance name, engine version, storage capacity, VPC vSwitch ID, and numbers of CN/DN nodes—adapting to diverse business scale requirements.  \n- **Data Layer Governance**: Includes built-in initialization of databases (`databases`) and accounts (`accounts`), enabling permission isolation and multi-tenancy support.  \n- **Network Integration**: Enforces binding to a specified `vswitch_id`, ensuring deployment within a predefined VPC subnet—aligning with enterprise network compliance and security policies.  \n- **Infrastructure-as-Code (IaC) Practice**: All parameters are injected via variables (`var.*`), facilitating seamless integration with CI/CD pipelines, environment tiering (dev/staging/prod), and configuration management systems."
+  }
+}

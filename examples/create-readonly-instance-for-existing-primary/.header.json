@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "创建PolarDB-X只读实例模块",
+    "en-US": "Create PolarDB-X Read-Only Instance Module"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于在阿里云上自动化部署与主实例关联的PolarDB-X只读实例，支持灵活配置计算节点（CN）和数据节点（DN）的规格、数量、存储及版本等参数。",
+    "en-US": "This Terraform module automates the deployment of PolarDB-X read-only instances associated with a primary instance on Alibaba Cloud, supporting flexible configuration of compute node (CN) and data node (DN) specifications, quantities, storage, and versions."
+  },
+  "description": {
+    "zh-Hans": "该模块封装了PolarDB-X只读实例的基础设施即代码（IaC）定义，通过引用外部模块`../../modules/polardbx_readonly_instance`，实现了标准化、可复用的只读实例创建流程。它依赖于已存在的主数据库实例（由`primary_db_instance_id`指定），并在指定的VPC交换机（`vswitch_id`）内部署高可用、可扩展的只读计算层，适用于读写分离、负载分担、报表分析等场景。模块支持动态参数注入（例如引擎版本、存储容量、节点规格与数量、实例描述等），以保障环境一致性与部署效率。`create_readonly_instance = true` 明确启用了只读实例的创建行为，避免误触发。所有参数均通过变量传入，符合Terraform最佳实践，便于在不同环境（如开发/预发/生产环境）中进行差异化配置。",
+    "en-US": "This module encapsulates the Infrastructure-as-Code (IaC) definition for PolarDB-X read-only instances. It leverages the external module `../../modules/polardbx_readonly_instance` to standardize and reuse the read-only instance creation process. The module depends on an existing primary database instance (specified by `primary_db_instance_id`) and deploys a highly available, scalable read-only compute layer within a specified VPC vSwitch (`vswitch_id`). It is suitable for use cases such as read/write splitting, load distribution, and reporting analytics. The module supports dynamic parameter injection—including engine version, storage capacity, node specifications and count, and instance description—to ensure environment consistency and deployment efficiency. The flag `create_readonly_instance = true` explicitly enables read-only instance creation, preventing accidental execution. All parameters are passed in via variables, adhering to Terraform best practices and enabling environment-specific configurations (e.g., dev/staging/prod)."
+  }
+}

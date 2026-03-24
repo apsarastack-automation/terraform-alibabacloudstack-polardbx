@@ -1,0 +1,111 @@
+{
+  "db_instance_id": {
+    "description": "(Required) The ID of the existing PolarDBX instance. This module does NOT create instances - only manages backup policy for existing ones.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "（必填）现有PolarDB-X实例的ID。本模块不创建实例，仅管理现有实例的备份策略。",
+      "en-US": "(Required) The ID of the existing PolarDB-X instance. This module does NOT create instances—only manages backup policies for existing ones."
+    }
+  },
+  "backup_period": {
+    "description": "The backup cycle. You can select multiple days in a week. Valid values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Multiple values are separated by commas.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份周期。您可以选择一周中的多个日期。有效值：周一、周二、周三、周四、周五、周六、周日。多个值之间用逗号分隔。",
+      "en-US": "The backup cycle. You can select multiple days of the week. Valid values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Multiple values are separated by commas."
+    },
+    "default": "Monday,Wednesday,Friday"
+  },
+  "backup_set_retention": {
+    "description": "The retention period of the backup set. Valid values: 7 to 730 days.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份集的保留期限，有效值：7至730天。",
+      "en-US": "The retention period of the backup set. Valid values: 7 to 730 days."
+    },
+    "default": "7"
+  },
+  "backup_plan_begin": {
+    "description": "The start time of the backup. The time format is HH:mmZ, for example, 03:00Z.",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份的开始时间。时间格式为HH:mmZ，例如03:00Z。",
+      "en-US": "The start time of the backup. The time format is HH:mmZ, for example, 03:00Z."
+    },
+    "default": "03:00Z"
+  },
+  "remove_log_retention": {
+    "description": "The retention period of transaction logs. Valid values: 7 to 730 days.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "交易日志的保留期限，有效值为7至730天。",
+      "en-US": "The retention period for transaction logs. Valid values: 7 to 730 days."
+    },
+    "default": "7"
+  },
+  "local_log_retention_number": {
+    "description": "The number of transaction logs retained locally. Valid values: 6 to 100.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的事务日志数量。有效值：6 到 100。",
+      "en-US": "The number of transaction logs retained locally. Valid values: 6 to 100."
+    },
+    "default": "60"
+  },
+  "force_clean_on_high_space_usage": {
+    "description": "Specifies whether to forcibly delete backups when the storage space usage is high. Valid values: 0 (no), 1 (yes).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "指定在存储空间使用率较高时是否强制删除备份。取值：0（否）、1（是）。",
+      "en-US": "Specifies whether to forcibly delete backups when storage space usage is high. Valid values: 0 (no) and 1 (yes)."
+    },
+    "default": "1"
+  },
+  "local_log_retention": {
+    "description": "The retention period of transaction logs that are retained locally. Unit: days.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的交易日志的保留期限，单位：天。",
+      "en-US": "The retention period, in days, for transaction logs retained locally."
+    },
+    "default": "7"
+  },
+  "log_local_retention_space": {
+    "description": "The maximum space occupied by transaction logs that are retained locally. Unit: %. Valid values: 0 to 100.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "本地保留的事务日志所占用的最大空间，单位为百分比（%）。有效值：0 到 100。",
+      "en-US": "The maximum percentage of local disk space that can be occupied by retained transaction logs. Valid values: 0 to 100."
+    },
+    "default": "30"
+  },
+  "backup_way": {
+    "description": "Backup method. Default: P (physical backup).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份方法。默认值：P（物理备份）。",
+      "en-US": "Backup method. Default: P (physical backup)."
+    },
+    "default": "P"
+  },
+  "backup_type": {
+    "description": "Backup type. Default: 0 (full backup).",
+    "type": "string",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "备份类型。默认值：0（完全备份）。",
+      "en-US": "Backup type. Default: 0 (full backup)."
+    },
+    "default": "0"
+  }
+}

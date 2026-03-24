@@ -1,0 +1,72 @@
+{
+  "instance_id": {
+    "description": "The ID of the read-only PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的ID。",
+      "en-US": "The ID of the read-only PolarDB-X instance."
+    }
+  },
+  "instance_name": {
+    "description": "The name of the read-only PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的名称。",
+      "en-US": "The name of the read-only PolarDB-X instance."
+    }
+  },
+  "primary_db_instance_id": {
+    "description": "The ID of the primary PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "主PolarDB-X实例的ID。",
+      "en-US": "The ID of the primary PolarDB-X instance."
+    }
+  },
+  "is_read_db_instance": {
+    "description": "Whether this is a read-only instance.",
+    "i18n": {
+      "zh-Hans": "该实例是否为只读实例。",
+      "en-US": "Whether this is a read-only instance."
+    }
+  },
+  "vswitch_id": {
+    "description": "The ID of the VSwitch used by the instance.",
+    "i18n": {
+      "zh-Hans": "实例所使用的虚拟交换机（VSwitch）的ID。",
+      "en-US": "The ID of the VSwitch used by the instance."
+    }
+  },
+  "cn_node_class": {
+    "description": "The class of computing nodes (CN).",
+    "i18n": {
+      "zh-Hans": "计算节点（CN）类别",
+      "en-US": "The class of computing nodes (CN)."
+    }
+  },
+  "dn_node_class": {
+    "description": "The class of storage nodes (DN).",
+    "i18n": {
+      "zh-Hans": "存储节点（DN）的类别",
+      "en-US": "The class of storage nodes (DN)."
+    }
+  },
+  "engine_version": {
+    "description": "The database engine version.",
+    "i18n": {
+      "zh-Hans": "数据库引擎版本。",
+      "en-US": "The database engine version."
+    }
+  },
+  "connection_string": {
+    "description": "The connection string of the instance.",
+    "i18n": {
+      "zh-Hans": "实例的连接字符串。",
+      "en-US": "The connection string of the instance."
+    }
+  },
+  "status": {
+    "description": "The status of the resource.",
+    "i18n": {
+      "zh-Hans": "资源的状态。",
+      "en-US": "The status of the resource."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 备份策略配置模块",
+    "en-US": "PolarDBX Backup Policy Configuration Module"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于为已存在的阿里云PolarDB-X（云原生分布式数据库）实例配置统一的备份与日志保留策略，不涉及数据库实例的创建，仅管理备份相关的生命周期行为。",
+    "en-US": "This Terraform module configures unified backup and log retention policies for an existing Alibaba Cloud PolarDB-X (cloud-native distributed database) instance; it does not create the database instance, but only manages backup-related lifecycle behaviors."
+  },
+  "description": {
+    "zh-Hans": "该模块通过 `alibabacloudstack_polardbx_backup_policy` 资源对 PolarDB-X 实例实施精细化备份治理，支持配置全量/增量备份周期、备份集保留天数、备份计划启动时间、本地日志保留数量与空间阈值、高空间占用时的强制清理策略，以及备份方式（如自动/手动）和备份类型（如逻辑/物理）。所有参数均通过变量注入，确保备份策略可复用、可版本化、可跨环境部署。适用于需满足合规性要求（如等保、GDPR）、保障数据可恢复性及优化存储成本的生产场景。",
+    "en-US": "This module implements fine-grained backup governance for PolarDB-X instances via the `alibabacloudstack_polardbx_backup_policy` resource, supporting configuration of full/incremental backup schedules, backup retention periods, backup plan start times, local log retention counts and disk space thresholds, forced cleanup policies under high disk usage, backup modes (e.g., automatic/manual), and backup types (e.g., logical/physical). All parameters are injected via variables, ensuring policy reusability, version control, and cross-environment deployability. It is suitable for production environments requiring compliance (e.g., MLPS 2.0, GDPR), guaranteed data recoverability, and optimized storage costs."
+  }
+}

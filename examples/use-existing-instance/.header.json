@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 实例模块化部署配置",
+    "en-US": "PolarDB-X Instance Modular Deployment Configuration"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于以声明式方式部署和管理阿里云PolarDB-X（分布式关系型数据库）实例及其关联的数据库与账号资源。",
+    "en-US": "This Terraform module is used to declaratively deploy and manage Alibaba Cloud PolarDB-X (distributed relational database) instances, along with their associated databases and account resources."
+  },
+  "description": {
+    "zh-Hans": "该模块封装了PolarDB-X实例的基础设施即代码（IaC）配置逻辑，通过复用`../../modules/polardbx_instance`子模块，实现对指定实例（由`instance_id`标识）的精细化治理：\n\n- **实例绑定**：将配置作用于已存在的或由上游模块创建的PolarDB-X实例；\n- **数据库自动化管理**：根据`databases`变量定义，批量创建、更新或销毁逻辑数据库（如分库规则、字符集、排序规则等）；\n- **账号权限生命周期管控**：依据`accounts`变量配置，统一纳管数据库账号（包括用户名、密码、主机白名单、读写权限、授权范围等），确保最小权限原则与审计合规性。\n\n该设计支持多环境一致交付、版本化变更追踪及跨团队协作复用，是云原生数据库基础设施标准化运维的关键组件。",
+    "en-US": "This module encapsulates the Infrastructure-as-Code (IaC) configuration logic for PolarDB-X instances, reusing the `../../modules/polardbx_instance` submodule to enable fine-grained governance of a specified instance (identified by `instance_id`):\n\n- **Instance Binding**: Applies configurations to an existing PolarDB-X instance—or one provisioned by an upstream module.  \n- **Automated Database Management**: Creates, updates, or destroys logical databases in bulk according to the `databases` variable, including sharding rules, character sets, and collations.  \n- **Account and Permission Lifecycle Management**: Uniformly manages database accounts—such as usernames, passwords, host allowlists, read/write permissions, and scope of authorization—based on the `accounts` variable, ensuring adherence to the principle of least privilege and audit compliance.\n\nThis design supports consistent multi-environment delivery, versioned change tracking, and cross-team reuse, serving as a critical component for standardized, cloud-native database infrastructure operations."
+  }
+}

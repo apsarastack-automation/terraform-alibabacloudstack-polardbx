@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "阿里云PolarDB-X只读实例创建配置",
+    "en-US": "Alibaba Cloud PolarDB-X Read-Only Instance Creation Configuration"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform脚本用于动态配置并创建阿里云PolarDB-X（分布式关系型数据库）的只读实例，支持自动选择可用区与最优规格，并通过变量灵活控制实例拓扑、节点类型及数量。",
+    "en-US": "This Terraform script dynamically configures and creates read-only instances of Alibaba Cloud PolarDB-X (a distributed relational database), supporting automatic selection of availability zones and optimal instance specifications, while enabling flexible control over instance topology, node types, and node counts via variables."
+  },
+  "description": {
+    "zh-Hans": "该脚本通过数据源查询当前地域下支持创建VSwitch的可用区（`alibabacloudstack_zones`），并分别获取CN（计算节点）和DN（数据节点）类型的最新CPU排序规格列表；结合本地变量（`locals`）实现规格的智能默认选择（优先采用用户输入的变量值，若未提供则取列表首项）。最终根据条件（`var.create_readonly_instance`）调用 `alibabacloudstack_polardbx_readonly_instance` 资源创建只读实例，自动继承主实例的高可用架构，并支持自定义实例描述、引擎版本、存储容量、专有网络交换机、节点规格与数量、拓扑类型及部署可用区。所有参数均设计为可选或具备安全默认值，兼顾自动化部署与人工干预需求。",
+    "en-US": "This script queries the available zones supporting VSwitch creation in the current region via the data source `alibabacloudstack_zones`, and separately retrieves the latest CPU-sorted instance type lists for CN (Compute Node) and DN (Data Node). It leverages local values (`locals`) to implement intelligent default selection of instance types—preferring user-provided variables, falling back to the first item if unspecified. Finally, it invokes the `alibabacloudstack_polardbx_readonly_instance` resource to create a read-only instance conditionally based on `var.create_readonly_instance`. The read-only instance automatically inherits the high-availability architecture of the primary instance and supports customization of description, engine version, storage capacity, VPC vSwitch, node specifications and counts, topology type, and deployment zones. All parameters are designed to be optional or equipped with safe default values, balancing automation with manual configurability."
+  }
+}

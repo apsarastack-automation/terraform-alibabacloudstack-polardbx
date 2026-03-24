@@ -1,0 +1,37 @@
+{
+  "instance_id": {
+    "description": "The ID of the created read-only PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "创建的只读PolarDB-X实例的ID。",
+      "en-US": "The ID of the created read-only PolarDB-X instance."
+    }
+  },
+  "instance_name": {
+    "description": "The name of the read-only PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "只读PolarDBX实例的名称。",
+      "en-US": "The name of the read-only PolarDB-X instance."
+    }
+  },
+  "primary_db_instance_id": {
+    "description": "The ID of the primary PolarDBX instance.",
+    "i18n": {
+      "zh-Hans": "主PolarDB-X实例的ID。",
+      "en-US": "The ID of the primary PolarDB-X instance."
+    }
+  },
+  "connection_string": {
+    "description": "The connection string of the read-only instance.",
+    "i18n": {
+      "zh-Hans": "只读实例的连接字符串。",
+      "en-US": "The connection string of the read-only instance."
+    }
+  },
+  "status": {
+    "description": "The status of the read-only instance.",
+    "i18n": {
+      "zh-Hans": "只读实例的状态。",
+      "en-US": "The status of the read-only instance."
+    }
+  }
+}
