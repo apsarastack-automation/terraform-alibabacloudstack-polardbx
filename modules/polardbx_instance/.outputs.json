@@ -47,5 +47,19 @@
       "zh-Hans": "存储节点（DN）的类别",
       "en-US": "The class of storage nodes (DN)."
     }
+  },
+  "backup_set_id": {
+    "description": "The ID of the backup set created by the manual backup. Null when enable_backup is false.",
+    "i18n": {
+      "zh-Hans": "手动备份创建的备份集ID。enable_backup 为 false 时为 null。",
+      "en-US": "The ID of the backup set created by the manual backup. Null when enable_backup is false."
+    }
+  },
+  "backup_status": {
+    "description": "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed). Null when enable_backup is false.",
+    "i18n": {
+      "zh-Hans": "手动备份的状态。有效值：0（创建中）、1（成功）、2（失败）。enable_backup 为 false 时为 null。",
+      "en-US": "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed). Null when enable_backup is false."
+    }
   }
 }

@@ -92,6 +92,20 @@ variable "use_account_database_binding" {
   default     = false
 }
 
+# --- Manual Backup Variables ---
+
+variable "enable_backup" {
+  description = "Whether to trigger a one-time manual backup for the PolarDBX instance. When true, a single manual backup is initiated after the instance is available."
+  type        = bool
+  default     = false
+}
+
+variable "backup_type" {
+  description = "The type of the manual backup. Valid values: 0 (physical backup). Only used when enable_backup is true."
+  type        = number
+  default     = 0
+}
+
 # --- Log Engine Variables ---
 
 variable "enable_log_engine" {

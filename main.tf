@@ -22,6 +22,8 @@ module "polardbx_instance" {
   databases                    = var.databases
   accounts                     = var.accounts
   use_account_database_binding = var.use_account_database_binding
+  enable_backup                = var.enable_backup
+  backup_type                  = var.backup_type
 }
 
 module "polardbx_log_engine" {

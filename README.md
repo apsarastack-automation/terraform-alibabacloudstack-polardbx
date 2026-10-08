@@ -1,17 +1,18 @@
 =====
 # Alibaba Cloud PolarDBX Terraform Module
 
-This module is designed to create and manage **PolarDBX instances**, **Log Engine (CDC)**, **read-write splitting configurations**, and **read-only instances** on Alibaba Cloud Stack, providing integrated infrastructure orchestration capabilities for PolarDBX.
+This module is designed to create and manage **PolarDBX instances**, **one-time manual backups**, **Log Engine (CDC)**, **read-write splitting configurations**, and **read-only instances** on Alibaba Cloud Stack, providing integrated infrastructure orchestration capabilities for PolarDBX.
 
 ## Features
 
 - Create a new PolarDBX instance (or reuse an existing one)  
 - Manage PolarDBX databases and accounts within the instance  
+- Trigger a one-time manual backup for the instance (`enable_backup`)  
 - Configure the Log Engine (CDC) service, supporting multi-stream synchronization  
 - Enable and manage read-write splitting policies, supporting HTAP scenarios  
 - Create and manage PolarDBX read-only instances to separate read and write workloads  
 - Support extending configuration using an existing PolarDBX instance  
-- Backup policy management has been decoupled into a dedicated module (`polardbx_backup_policy`); this module does **not** include backup functionality  
+- Backup policy management has been decoupled into a dedicated module (`polardbx_backup_policy`); this module only supports one-time manual backups, not periodic backup policies  
 
 > ⚠️ **Important Notes**:  
 > - **Backup policy management has been moved to a separate module.** To configure backup policies, please use the `polardbx_backup_policy` submodule.  
@@ -48,6 +49,10 @@ module "polardbx" {
       description = "Application database user"
     }
   }
+
+  # One-time manual backup
+  enable_backup = true
+  backup_type   = 0
 
   # Log Engine (CDC)
   enable_log_engine                = true
@@ -150,6 +155,8 @@ module "polardbx" {
 | `databases`                             | Map of databases to create (keys are database names; values are configuration objects)                                     | `map(object({encode=optional(string,"utf8mb4"),mode=optional(string,"auto"),description=optional(string,"")}))`                                             | `{}`          | No                                            |
 | `accounts`                              | Map of accounts to create (keys are account names; values are configuration objects)                                        | `map(object({password=string,description=optional(string,""),account_privileges=optional(map(string),{})}))`                                                | `{}`          | No                                            |
 | `use_account_database_binding`        | Whether to use the `account_database_binding` resource for privilege management (recommended for complex permission scenarios) | `bool`                                                                                                                                                       | `false`       | No                                            |
+| `enable_backup`                         | Whether to trigger a one-time manual backup for the instance                                                              | `bool`                                                                                                                                                       | `false`       | No                                            |
+| `backup_type`                           | Type of the manual backup; valid values: `0` (physical backup); only used when `enable_backup` is true                     | `number`                                                                                                                                                     | `0`           | No                                            |
 | `enable_log_engine`                     | Whether to enable Log Engine (CDC) configuration                                                                            | `bool`                                                                                                                                                       | `false`       | No                                            |
 | `log_engine_cdc_node_class`             | CDC node specification                                                                                                      | `string`                                                                                                                                                     | `""`          | No                                            |
 | `log_engine_cdc_node_count`             | Number of CDC nodes                                                                                                         | `number`                                                                                                                                                     | `2`           | No                                            |
@@ -186,6 +193,8 @@ module "polardbx" {
 | `vswitch_id`                            | VSwitch ID used by the primary instance                                                                                  |
 | `cn_node_class`                         | CN node specification of the primary instance                                                                            |
 | `dn_node_class`                         | DN node specification of the primary instance                                                                            |
+| `backup_set_id`                         | ID of the backup set created by the manual backup (`null` when `enable_backup` is false)                                 |
+| `backup_status`                         | Status of the manual backup: `0` creating, `1` success, `2` failed (`null` when `enable_backup` is false)                |
 | `log_engine_id`                         | Log Engine (CDC) configuration ID (returned if enabled)                                                                  |
 | `log_engine_cdc_node_class`             | CDC node specification                                                                                                   |
 | `log_engine_cdc_node_count`             | Number of CDC nodes                                                                                                      |
@@ -217,9 +226,9 @@ For more usage scenarios, refer to the [`examples/`](./examples) directory:
 ## Notes
 
 - This module is a **composite wrapper module**; its behavior is entirely determined by the referenced submodules (`polardbx_instance`, `polardbx_log_engine`, `polardbx_read_write_splitting`, `polardbx_readonly_instance`).  
-- **Backup policies are not managed by this module.** Always use the dedicated `polardbx_backup_policy` submodule to configure backups.  
+- **Backup policies are not managed by this module.** Always use the dedicated `polardbx_backup_policy` submodule to configure backups. `enable_backup` only triggers a **one-time manual backup**; the backup resource is trigger-style (no update, all arguments ForceNew) and its delete is a no-op (the backup set remains on the instance after destroy).  
 - When `instance_id` is specified, primary instance resources (e.g., `alibabacloudstack_polardbx_instance`) are **not created**; only databases, accounts, and advanced features (CDC/RW/RO) are managed.  
 - The Log Engine (CDC), read-write splitting, and read-only instances **strongly depend on the primary instance ID**, so either `instance_id` must be provided or the primary instance must have been successfully created and its output made available.  
 - `use_account_database_binding = true` is recommended for production environments requiring fine-grained control over account-database privilege bindings.  
-- All advanced features (CDC, RW splitting, read-only instances) are **disabled by default**; enable them explicitly to avoid unintended resource creation.  
+- All advanced features (CDC, RW splitting, read-only instances, manual backup) are **disabled by default**; enable them explicitly to avoid unintended resource creation.  
 - For managing multiple read-only instances or complex CDC multi-stream topologies, consider directly invoking the corresponding submodules to achieve finer-grained control.

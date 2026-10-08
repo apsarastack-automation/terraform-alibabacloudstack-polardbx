@@ -33,6 +33,18 @@ output "dn_node_class" {
   value       = module.polardbx_instance.dn_node_class
 }
 
+# --- Manual Backup Outputs ---
+
+output "backup_set_id" {
+  description = "The ID of the backup set created by the manual backup. Null when enable_backup is false."
+  value       = module.polardbx_instance.backup_set_id
+}
+
+output "backup_status" {
+  description = "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed). Null when enable_backup is false."
+  value       = module.polardbx_instance.backup_status
+}
+
 # --- Log Engine (CDC) Outputs ---
 
 output "log_engine_id" {

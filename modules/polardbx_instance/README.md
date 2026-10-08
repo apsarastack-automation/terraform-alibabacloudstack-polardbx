@@ -15,6 +15,7 @@ This module manages Alibaba Cloud PolarDBX instances and related resources on Al
 * [alibabacloudstack_polardbx_database](https://registry.terraform.io/providers/aliyun/alibabacloudstack/latest/docs/resources/polardbx_database)
 * [alibabacloudstack_polardbx_account](https://registry.terraform.io/providers/aliyun/alibabacloudstack/latest/docs/resources/polardbx_account)
 * [alibabacloudstack_polardbx_account_database_binding](https://registry.terraform.io/providers/aliyun/alibabacloudstack/latest/docs/resources/polardbx_account_database_binding)
+* [alibabacloudstack_polardbx_backup](https://registry.terraform.io/providers/aliyun/alibabacloudstack/latest/docs/resources/polardbx_backup)
 
 ## Usage Examples
 
@@ -175,6 +176,8 @@ module "backup_policy" {
 | databases | Map of databases to create | `map(object)` | `{}` | No |
 | accounts | Map of accounts to create | `map(object)` | `{}` | No |
 | use_account_database_binding | Use account_database_binding resource for privileges | `bool` | `false` | No |
+| enable_backup | Trigger a one-time manual backup for the instance | `bool` | `false` | No |
+| backup_type | Type of the manual backup (`0` = physical backup); only used when `enable_backup` is true | `number` | `0` | No |
 
 > 💡 **Mutual Exclusion Rules**:
 > - `instance_id` and `name`: choose exactly one.
@@ -192,6 +195,8 @@ module "backup_policy" {
 | vpc_id | ID of the VPC used by the instance |
 | cn_node_class | Class of computing nodes (CN) |
 | dn_node_class | Class of storage nodes (DN) |
+| backup_set_id | ID of the backup set created by the manual backup (`null` when `enable_backup` is false) |
+| backup_status | Status of the manual backup: `0` creating, `1` success, `2` failed (`null` when `enable_backup` is false) |
 
 ## Notes
 
@@ -199,6 +204,7 @@ module "backup_policy" {
 * Database and account management can be done independently of instance creation.
 * **For backup policy configuration, use the separate `polardbx_backup_policy` module.**
 * Set `use_account_database_binding = true` to use the `account_database_binding` resource for managing account privileges.
+* Set `enable_backup = true` to trigger a one-time manual backup. The backup resource is trigger-style: it has no update operation, all arguments are ForceNew, and its delete is a no-op (the backup set remains on the instance after `terraform destroy`).
 
 ## Related Modules
 

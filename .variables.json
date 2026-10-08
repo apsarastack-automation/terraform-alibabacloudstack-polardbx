@@ -139,6 +139,26 @@
     },
     "default": "false"
   },
+  "enable_backup": {
+    "description": "Whether to trigger a one-time manual backup for the PolarDBX instance. When true, a single manual backup is initiated after the instance is available.",
+    "type": "bool",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "是否为 PolarDB-X 实例触发一次手动备份。设为 true 时，将在实例可用后发起一次手动备份。",
+      "en-US": "Whether to trigger a one-time manual backup for the PolarDB-X instance. When true, a single manual backup is initiated after the instance is available."
+    },
+    "default": "false"
+  },
+  "backup_type": {
+    "description": "The type of the manual backup. Valid values: 0 (physical backup). Only used when enable_backup is true.",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "手动备份的类型。有效值：0（物理备份）。仅在 enable_backup 为 true 时生效。",
+      "en-US": "The type of the manual backup. Valid values: 0 (physical backup). Only used when enable_backup is true."
+    },
+    "default": "0"
+  },
   "enable_log_engine": {
     "description": "Whether to enable log engine (CDC) configuration.",
     "type": "bool",

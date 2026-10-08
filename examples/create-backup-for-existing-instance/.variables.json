@@ -1,0 +1,21 @@
+{
+  "db_instance_id": {
+    "description": "The ID of the existing PolarDBX instance.",
+    "type": "string",
+    "optional": false,
+    "i18n": {
+      "zh-Hans": "现有PolarDB-X实例的ID。",
+      "en-US": "The ID of the existing PolarDB-X instance."
+    }
+  },
+  "backup_type": {
+    "description": "The type of the manual backup. Valid values: 0 (physical backup).",
+    "type": "number",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "手动备份的类型。有效值：0（物理备份）。",
+      "en-US": "The type of the manual backup. Valid values: 0 (physical backup)."
+    },
+    "default": "0"
+  }
+}

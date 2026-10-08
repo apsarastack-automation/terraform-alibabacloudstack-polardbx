@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 手动备份触发模块",
+    "en-US": "PolarDB-X Manual Backup Trigger Module"
+  },
+  "overview": {
+    "zh-Hans": "该脚本采用 Terraform 模块化方式，为已存在的 PolarDB-X 数据库实例触发一次手动备份（物理备份），并输出备份集 ID 与备份状态，适用于变更前快照、应急备份等企业级数据保护场景。",
+    "en-US": "This script uses Terraform's modular approach to trigger a one-time manual (physical) backup for an existing PolarDB-X database instance, exporting the backup set ID and backup status—suitable for pre-change snapshots, emergency backups, and other enterprise data protection scenarios."
+  },
+  "description": {
+    "zh-Hans": "该示例通过 `polardbx_instance` 模块的 `enable_backup` 开关，对已有 PolarDB-X 实例发起一次手动备份（底层使用 `alibabacloudstack_polardbx_backup` 触发型资源）。备份类型通过 `backup_type` 变量声明（0=物理备份）。备份完成后输出 `backup_set_id` 与 `backup_status`（0=创建中、1=成功、2=失败），便于与自动化运维流程集成。本示例不创建实例、不管理备份策略；周期性备份策略请使用 `polardbx_backup_policy` 模块。",
+    "en-US": "This example triggers a one-time manual backup for an existing PolarDB-X instance via the `enable_backup` switch of the `polardbx_instance` module (backed by the trigger-style `alibabacloudstack_polardbx_backup` resource). The backup type is declared through the `backup_type` variable (0 = physical backup). After completion it exports `backup_set_id` and `backup_status` (0 = creating, 1 = success, 2 = failed) for integration with automated operations workflows. This example does not create instances and does not manage backup policies; for periodic backup policies use the `polardbx_backup_policy` module."
+  }
+}

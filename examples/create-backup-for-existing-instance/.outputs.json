@@ -1,0 +1,23 @@
+{
+  "db_instance_id": {
+    "description": "The ID of the PolarDBX instance for which the manual backup was created.",
+    "i18n": {
+      "zh-Hans": "已创建手动备份的PolarDB-X实例的ID。",
+      "en-US": "The ID of the PolarDB-X instance for which the manual backup was created."
+    }
+  },
+  "backup_set_id": {
+    "description": "The ID of the backup set created by the manual backup.",
+    "i18n": {
+      "zh-Hans": "手动备份创建的备份集ID。",
+      "en-US": "The ID of the backup set created by the manual backup."
+    }
+  },
+  "backup_status": {
+    "description": "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed).",
+    "i18n": {
+      "zh-Hans": "手动备份的状态。有效值：0（创建中）、1（成功）、2（失败）。",
+      "en-US": "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed)."
+    }
+  }
+}

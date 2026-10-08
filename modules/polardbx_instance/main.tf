@@ -102,4 +102,15 @@ resource "alibabacloudstack_polardbx_account_database_binding" "default" {
   ]
 }
 
+# --- PolarDBX Manual Backup Resource ---
+
+resource "alibabacloudstack_polardbx_backup" "this" {
+  count = var.enable_backup ? 1 : 0
+
+  instance_id = local.instance_id
+  backup_type = var.backup_type
+
+  depends_on = [alibabacloudstack_polardbx_instance.default]
+}
+
 

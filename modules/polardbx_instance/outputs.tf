@@ -32,3 +32,13 @@ output "dn_node_class" {
   description = "The class of storage nodes (DN)."
   value       = local.dn_node_class
 }
+
+output "backup_set_id" {
+  description = "The ID of the backup set created by the manual backup. Null when enable_backup is false."
+  value       = var.enable_backup ? alibabacloudstack_polardbx_backup.this[0].backup_set_id : null
+}
+
+output "backup_status" {
+  description = "The status of the manual backup. Valid values: 0 (creating), 1 (success), 2 (failed). Null when enable_backup is false."
+  value       = var.enable_backup ? alibabacloudstack_polardbx_backup.this[0].status : null
+}
