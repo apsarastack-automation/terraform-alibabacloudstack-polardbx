@@ -10,3 +10,10 @@ module "polardbx" {
   databases      = var.databases
   accounts       = var.accounts
 }
+
+module "polardbx_super_account" {
+  source = "../../modules/polardbx_super_account"
+
+  instance_id   = module.polardbx.instance_id
+  super_account = var.super_account
+}

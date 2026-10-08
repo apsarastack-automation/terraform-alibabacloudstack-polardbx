@@ -4,6 +4,7 @@
 # For log engine (CDC) management, use the polardbx_log_engine submodule separately.
 # For read-write splitting configuration, use the polardbx_read_write_splitting submodule separately.
 # For read-only instance management, use the polardbx_readonly_instance submodule separately.
+# For super account (three-role rights separation) management, use the polardbx_super_account submodule.
 
 module "polardbx_instance" {
   source = "./modules/polardbx_instance"
@@ -22,6 +23,20 @@ module "polardbx_instance" {
   databases                    = var.databases
   accounts                     = var.accounts
   use_account_database_binding = var.use_account_database_binding
+}
+
+module "polardbx_super_account" {
+  source = "./modules/polardbx_super_account"
+
+  instance_id   = module.polardbx_instance.instance_id
+  super_account = var.super_account
+
+  # Enabling three-role rights separation transiently flips the instance out
+  # of Running; it must be serialized AFTER the instance module finishes all
+  # database/account resources, otherwise a concurrent CreateDB races with the
+  # separation change and fails with DBInstance.NotRunning. Destroy order is
+  # reversed too: separation is disabled before normal accounts are deleted.
+  depends_on = [module.polardbx_instance]
 }
 
 module "polardbx_log_engine" {

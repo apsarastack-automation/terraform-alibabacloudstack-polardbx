@@ -33,5 +33,19 @@
       "zh-Hans": "实例所使用的虚拟交换机（VSwitch）的ID。",
       "en-US": "The ID of the VSwitch used by the instance."
     }
+  },
+  "super_account_admin_name": {
+    "description": "The name of the super (admin) account. Null when no super account is configured.",
+    "i18n": {
+      "zh-Hans": "高权限（管理员）账号的名称。未配置高权限账号时为 null。",
+      "en-US": "The name of the super (admin) account. Null when no super account is configured."
+    }
+  },
+  "super_account_three_roles": {
+    "description": "Whether three-role rights separation (admin/security/audit) is enabled on the instance. Null when no super account is configured.",
+    "i18n": {
+      "zh-Hans": "实例上是否已启用三权分立（管理员/安全管理员/审计员）。未配置高权限账号时为 null。",
+      "en-US": "Whether three-role rights separation (admin/security/audit) is enabled on the instance. Null when no super account is configured."
+    }
   }
 }
