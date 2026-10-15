@@ -1,13 +1,14 @@
 =====
 # Alibaba Cloud PolarDBX Terraform Module
 
-This module is designed to create and manage **PolarDBX instances**, **one-time manual backups**, **Log Engine (CDC)**, **read-write splitting configurations**, and **read-only instances** on Alibaba Cloud Stack, providing integrated infrastructure orchestration capabilities for PolarDBX.
+This module is designed to create and manage **PolarDBX instances**, **one-time manual backups**, **super accounts (three-role rights separation)**, **Log Engine (CDC)**, **read-write splitting configurations**, and **read-only instances** on Alibaba Cloud Stack, providing integrated infrastructure orchestration capabilities for PolarDBX.
 
 ## Features
 
 - Create a new PolarDBX instance (or reuse an existing one)  
 - Manage PolarDBX databases and accounts within the instance  
 - Trigger a one-time manual backup for the instance (`enable_backup`)  
+- Create a super account with optional three-role rights separation (admin / security admin / auditor)  
 - Configure the Log Engine (CDC) service, supporting multi-stream synchronization  
 - Enable and manage read-write splitting policies, supporting HTAP scenarios  
 - Create and manage PolarDBX read-only instances to separate read and write workloads  
@@ -16,7 +17,7 @@ This module is designed to create and manage **PolarDBX instances**, **one-time 
 
 > ⚠️ **Important Notes**:  
 > - **Backup policy management has been moved to a separate module.** To configure backup policies, please use the `polardbx_backup_policy` submodule.  
-> - This module is a **composite wrapper module**, internally invoking four independent submodules: `polardbx_instance`, `polardbx_log_engine`, `polardbx_read_write_splitting`, and `polardbx_readonly_instance`. Each submodule is fully decoupled and can be enabled independently.
+> - This module is a **composite wrapper module**, internally invoking five independent submodules: `polardbx_instance`, `polardbx_super_account`, `polardbx_log_engine`, `polardbx_read_write_splitting`, and `polardbx_readonly_instance`. Each submodule is fully decoupled and can be enabled independently.
 
 ## Usage
 
@@ -53,6 +54,19 @@ module "polardbx" {
   # One-time manual backup
   enable_backup = true
   backup_type   = 0
+
+  # Super account with three-role rights separation
+  super_account = {
+    admin_account_name           = "admin_user"
+    admin_account_password       = "SecurePassword123!"
+    admin_account_description    = "Super admin account"
+    security_account_name        = "security_user"
+    security_account_password    = "SecurePassword123!"
+    security_account_description = "Security admin account"
+    audit_account_name           = "audit_user"
+    audit_account_password       = "SecurePassword123!"
+    audit_account_description    = "Audit account"
+  }
 
   # Log Engine (CDC)
   enable_log_engine                = true
@@ -157,6 +171,7 @@ module "polardbx" {
 | `use_account_database_binding`        | Whether to use the `account_database_binding` resource for privilege management (recommended for complex permission scenarios) | `bool`                                                                                                                                                       | `false`       | No                                            |
 | `enable_backup`                         | Whether to trigger a one-time manual backup for the instance                                                              | `bool`                                                                                                                                                       | `false`       | No                                            |
 | `backup_type`                           | Type of the manual backup; valid values: `0` (physical backup); only used when `enable_backup` is true                     | `number`                                                                                                                                                     | `0`           | No                                            |
+| `super_account`                         | Super account configuration (sensitive); set to `null` to skip. Fields: `admin_account_name`/`admin_account_password` (required), `admin_account_description`, `security_account_*`, `audit_account_*` (security and audit groups must be provided together) | `object({admin_account_name=string,admin_account_password=string,admin_account_description=optional(string,""),security_account_name=optional(string),security_account_password=optional(string),security_account_description=optional(string,""),audit_account_name=optional(string),audit_account_password=optional(string),audit_account_description=optional(string)})` | `null`        | No                                            |
 | `enable_log_engine`                     | Whether to enable Log Engine (CDC) configuration                                                                            | `bool`                                                                                                                                                       | `false`       | No                                            |
 | `log_engine_cdc_node_class`             | CDC node specification                                                                                                      | `string`                                                                                                                                                     | `""`          | No                                            |
 | `log_engine_cdc_node_count`             | Number of CDC nodes                                                                                                         | `number`                                                                                                                                                     | `2`           | No                                            |
@@ -195,6 +210,8 @@ module "polardbx" {
 | `dn_node_class`                         | DN node specification of the primary instance                                                                            |
 | `backup_set_id`                         | ID of the backup set created by the manual backup (`null` when `enable_backup` is false)                                 |
 | `backup_status`                         | Status of the manual backup: `0` creating, `1` success, `2` failed (`null` when `enable_backup` is false)                |
+| `super_account_admin_name`              | Name of the super (admin) account, marked sensitive (`null` when `super_account` is not configured)                        |
+| `super_account_three_roles`             | Whether three-role rights separation (admin/security/audit) is enabled (`null` when `super_account` is not configured)   |
 | `log_engine_id`                         | Log Engine (CDC) configuration ID (returned if enabled)                                                                  |
 | `log_engine_cdc_node_class`             | CDC node specification                                                                                                   |
 | `log_engine_cdc_node_count`             | Number of CDC nodes                                                                                                      |
@@ -225,10 +242,11 @@ For more usage scenarios, refer to the [`examples/`](./examples) directory:
 
 ## Notes
 
-- This module is a **composite wrapper module**; its behavior is entirely determined by the referenced submodules (`polardbx_instance`, `polardbx_log_engine`, `polardbx_read_write_splitting`, `polardbx_readonly_instance`).  
+- This module is a **composite wrapper module**; its behavior is entirely determined by the referenced submodules (`polardbx_instance`, `polardbx_super_account`, `polardbx_log_engine`, `polardbx_read_write_splitting`, `polardbx_readonly_instance`).  
 - **Backup policies are not managed by this module.** Always use the dedicated `polardbx_backup_policy` submodule to configure backups. `enable_backup` only triggers a **one-time manual backup**; the backup resource is trigger-style (no update, all arguments ForceNew) and its delete is a no-op (the backup set remains on the instance after destroy).  
 - When `instance_id` is specified, primary instance resources (e.g., `alibabacloudstack_polardbx_instance`) are **not created**; only databases, accounts, and advanced features (CDC/RW/RO) are managed.  
 - The Log Engine (CDC), read-write splitting, and read-only instances **strongly depend on the primary instance ID**, so either `instance_id` must be provided or the primary instance must have been successfully created and its output made available.  
+- For the super account, the **security account group and the audit account group must be provided together**; providing only one of them is rejected by the provider (`RequiredWith` validation). The `super_account` variable is sensitive, and the provider's delete for the super account resource is a no-op (accounts remain on the instance after destroy).  
 - `use_account_database_binding = true` is recommended for production environments requiring fine-grained control over account-database privilege bindings.  
-- All advanced features (CDC, RW splitting, read-only instances, manual backup) are **disabled by default**; enable them explicitly to avoid unintended resource creation.  
+- All advanced features (CDC, RW splitting, read-only instances, super account, manual backup) are **disabled by default**; enable them explicitly to avoid unintended resource creation.  
 - For managing multiple read-only instances or complex CDC multi-stream topologies, consider directly invoking the corresponding submodules to achieve finer-grained control.

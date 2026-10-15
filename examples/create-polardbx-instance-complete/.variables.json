@@ -76,5 +76,15 @@
       "en-US": "Map of accounts to create."
     },
     "default": "{}"
+  },
+  "super_account": {
+    "description": "Super account configuration. Set to null to skip creating the super account. The security account group and the audit account group must be provided together - either both or neither.",
+    "type": "object({\n    admin_account_name           = string\n    admin_account_password       = string\n    admin_account_description    = optional(string, \"\")\n    security_account_name        = optional(string)\n    security_account_password    = optional(string)\n    security_account_description = optional(string, \"\")\n    audit_account_name           = optional(string)\n    audit_account_password       = optional(string)\n    audit_account_description    = optional(string)\n  })",
+    "optional": true,
+    "i18n": {
+      "zh-Hans": "高权限账号配置。设为 null 则跳过高权限账号的创建。安全账号组与审计账号组必须同时提供——要么都配置，要么都不配置。",
+      "en-US": "Super account configuration. Set to null to skip creating the super account. The security account group and the audit account group must be provided together - either both or neither."
+    },
+    "default": "null"
   }
 }

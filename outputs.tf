@@ -45,6 +45,19 @@ output "backup_status" {
   value       = module.polardbx_instance.backup_status
 }
 
+# --- Super Account Outputs ---
+
+output "super_account_admin_name" {
+  description = "The name of the super (admin) account. Null when no super account is configured."
+  value       = module.polardbx_super_account.super_account_admin_name
+  sensitive   = true
+}
+
+output "super_account_three_roles" {
+  description = "Whether three-role rights separation (admin/security/audit) is enabled on the instance. Null when no super account is configured."
+  value       = module.polardbx_super_account.super_account_three_roles
+}
+
 # --- Log Engine (CDC) Outputs ---
 
 output "log_engine_id" {

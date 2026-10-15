@@ -1,0 +1,14 @@
+{
+  "title": {
+    "zh-Hans": "PolarDB-X 高权限账号（三权分立）配置模块",
+    "en-US": "PolarDBX Super Account (Three-Role Rights Separation) Configuration Module"
+  },
+  "overview": {
+    "zh-Hans": "该Terraform模块用于为已存在的阿里云PolarDB-X（云原生分布式数据库）实例创建和管理高权限账号（Super Account），并可选启用三权分立（管理员/安全管理员/审计员）授权体系，不涉及数据库实例的创建。",
+    "en-US": "This Terraform module creates and manages a super account for an existing Alibaba Cloud PolarDB-X (cloud-native distributed database) instance, with optional three-role rights separation (admin / security admin / auditor); it does not create the database instance."
+  },
+  "description": {
+    "zh-Hans": "该模块通过 `alibabacloudstack_polardbx_super_account` 资源为 PolarDB-X 实例配置高权限账号。管理员账号（admin）为必配项；安全管理员账号（security）与审计员账号（audit）为可选项，且二者必须同时提供以启用三权分立（three_roles）。账号配置整体通过 `super_account` 对象变量注入并标记为敏感值，设为 `null` 时不创建任何账号。适用于需要满足等保、GDPR 等合规性要求、实现数据库权限分权制衡的生产场景。",
+    "en-US": "This module configures a super account for a PolarDB-X instance via the `alibabacloudstack_polardbx_super_account` resource. The admin account is required; the security admin account and the auditor account are optional and must be provided together to enable three-role rights separation (three_roles). The whole account configuration is injected through the sensitive `super_account` object variable; setting it to `null` skips account creation entirely. It is suitable for production environments requiring compliance (e.g., MLPS 2.0, GDPR) and separation of database privileges."
+  }
+}

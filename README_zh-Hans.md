@@ -1,12 +1,13 @@
 # 阿里云 PolarDBX Terraform 模块
 
-该模块用于在阿里云 Stack 上创建和管理 **PolarDBX 实例、一次性手动备份、日志引擎（CDC）、读写分离配置和只读实例**，提供一体化的 PolarDBX 基础设施编排能力。
+该模块用于在阿里云 Stack 上创建和管理 **PolarDBX 实例、一次性手动备份、高权限账号（三权分立）、日志引擎（CDC）、读写分离配置和只读实例**，提供一体化的 PolarDBX 基础设施编排能力。
 
 ## 功能特性
 
 - 创建新的 PolarDBX 实例（或复用已有实例）
 - 管理实例内的 PolarDBX 数据库和账号
 - 为实例触发一次性手动备份（`enable_backup`）
+- 创建高权限账号，可选启用三权分立（管理员/安全管理员/审计员）
 - 配置日志引擎（CDC）服务，支持多流同步
 - 启用和管理读写分离策略，支持 HTAP 场景
 - 创建和管理 PolarDBX 只读实例，实现读写负载分离
@@ -15,7 +16,7 @@
 
 > ⚠️ **重要说明**：
 > - **备份策略管理已移至独立模块**。如需配置备份策略，请使用 `polardbx_backup_policy` 子模块。
-> - 本模块是一个**组合封装模块**，内部调用 `polardbx_instance`、`polardbx_log_engine`、`polardbx_read_write_splitting` 和 `polardbx_readonly_instance` 四个子模块，各功能模块完全解耦、可独立启用。
+> - 本模块是一个**组合封装模块**，内部调用 `polardbx_instance`、`polardbx_super_account`、`polardbx_log_engine`、`polardbx_read_write_splitting` 和 `polardbx_readonly_instance` 五个子模块，各功能模块完全解耦、可独立启用。
 
 ## 使用方法
 
@@ -52,6 +53,19 @@ module "polardbx" {
   # 一次性手动备份
   enable_backup = true
   backup_type   = 0
+
+  # 高权限账号（三权分立）
+  super_account = {
+    admin_account_name           = "admin_user"
+    admin_account_password       = "SecurePassword123!"
+    admin_account_description    = "Super admin account"
+    security_account_name        = "security_user"
+    security_account_password    = "SecurePassword123!"
+    security_account_description = "Security admin account"
+    audit_account_name           = "audit_user"
+    audit_account_password       = "SecurePassword123!"
+    audit_account_description    = "Audit account"
+  }
 
   # 日志引擎（CDC）
   enable_log_engine                = true
@@ -156,6 +170,7 @@ module "polardbx" {
 | `use_account_database_binding` | 是否使用 `account_database_binding` 资源管理权限（推荐用于复杂权限场景） | `bool` | `false` | 否 |
 | `enable_backup` | 是否为实例触发一次性手动备份 | `bool` | `false` | 否 |
 | `backup_type` | 手动备份类型，取值：`0`（物理备份）；仅在 `enable_backup` 为 true 时生效 | `number` | `0` | 否 |
+| `super_account` | 高权限账号配置（敏感值）；设为 `null` 则跳过创建。字段：`admin_account_name`/`admin_account_password`（必填）、`admin_account_description`、`security_account_*`、`audit_account_*`（安全组与审计组必须同时提供） | `object({admin_account_name=string,admin_account_password=string,admin_account_description=optional(string,""),security_account_name=optional(string),security_account_password=optional(string),security_account_description=optional(string,""),audit_account_name=optional(string),audit_account_password=optional(string),audit_account_description=optional(string)})` | `null` | 否 |
 | `enable_log_engine` | 是否启用日志引擎（CDC）配置 | `bool` | `false` | 否 |
 | `log_engine_cdc_node_class` | CDC 节点规格 | `string` | `""` | 否 |
 | `log_engine_cdc_node_count` | CDC 节点数量 | `number` | `2` | 否 |
@@ -194,6 +209,8 @@ module "polardbx" {
 | `dn_node_class` | 主实例存储节点（DN）规格 |
 | `backup_set_id` | 手动备份创建的备份集 ID（`enable_backup` 为 false 时为 `null`） |
 | `backup_status` | 手动备份状态：`0` 创建中、`1` 成功、`2` 失败（`enable_backup` 为 false 时为 `null`） |
+| `super_account_admin_name` | 高权限（管理员）账号名称，标记为敏感值（未配置 `super_account` 时为 `null`） |
+| `super_account_three_roles` | 是否已启用三权分立（管理员/安全管理员/审计员）（未配置 `super_account` 时为 `null`） |
 | `log_engine_id` | 日志引擎（CDC）配置 ID（启用时返回） |
 | `log_engine_cdc_node_class` | CDC 节点规格 |
 | `log_engine_cdc_node_count` | CDC 节点数量 |
@@ -224,10 +241,11 @@ module "polardbx" {
 
 ## 注意事项
 
-- 本模块是**组合封装模块**，其行为完全由所引用的子模块（`polardbx_instance`、`polardbx_log_engine`、`polardbx_read_write_splitting`、`polardbx_readonly_instance`）决定。
+- 本模块是**组合封装模块**，其行为完全由所引用的子模块（`polardbx_instance`、`polardbx_super_account`、`polardbx_log_engine`、`polardbx_read_write_splitting`、`polardbx_readonly_instance`）决定。
 - **备份策略不在本模块范围内**，请务必使用独立的 `polardbx_backup_policy` 子模块进行配置。`enable_backup` 仅触发**一次性手动备份**；备份资源为触发型资源（无更新操作、所有参数 ForceNew），其删除为空操作（destroy 后备份集仍保留在实例上）。
 - 当 `instance_id` 被指定时，主实例相关资源（如 `alibabacloudstack_polardbx_instance`）不会被创建，仅管理数据库、账号及高级功能（CDC/RW/RO）。
 - 日志引擎（CDC）、读写分离、只读实例均**强依赖主实例 ID**，因此 `instance_id` 或成功创建的主实例输出必须可用。
+- 高权限账号的**安全账号组与审计账号组必须同时提供**，只提供其中一组会被 provider 拒绝（`RequiredWith` 校验）。`super_account` 变量为敏感值；高权限账号资源的 provider 删除为空操作（destroy 后账号仍保留在实例上）。
 - `use_account_database_binding = true` 推荐用于需要精细控制账号-数据库权限绑定的生产环境。
-- 所有高级功能（CDC、RW 分离、只读实例、手动备份）默认关闭，按需启用以避免非预期资源创建。
+- 所有高级功能（CDC、RW 分离、只读实例、高权限账号、手动备份）默认关闭，按需启用以避免非预期资源创建。
 - 若需管理多个只读实例或复杂 CDC 多流拓扑，建议直接调用对应子模块以获得更细粒度控制。

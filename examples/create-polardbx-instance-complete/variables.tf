@@ -52,3 +52,20 @@ variable "accounts" {
   }))
   default = {}
 }
+
+variable "super_account" {
+  description = "Super account configuration. Set to null to skip creating the super account. The security account group and the audit account group must be provided together - either both or neither."
+  type = object({
+    admin_account_name           = string
+    admin_account_password       = string
+    admin_account_description    = optional(string, "")
+    security_account_name        = optional(string)
+    security_account_password    = optional(string)
+    security_account_description = optional(string, "")
+    audit_account_name           = optional(string)
+    audit_account_password       = optional(string)
+    audit_account_description    = optional(string)
+  })
+  default   = null
+  sensitive = true
+}
